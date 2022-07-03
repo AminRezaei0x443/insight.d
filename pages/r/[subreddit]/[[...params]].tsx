@@ -4,7 +4,6 @@ import { zipObject } from "lodash";
 import { Dropdown } from "../../../components/common";
 import { GetServerSideProps } from "next";
 import {
-  getPopularPosts,
   getPopularPostsClient,
   getSubredditInfo
 } from "../../../functions/service";
@@ -28,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   query
 }) => {
-  const posts = await getPopularPosts({
+  const posts = await getPopularPostsClient({
     ...query,
     sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
   });

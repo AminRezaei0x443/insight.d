@@ -9,9 +9,16 @@ import { ReactNode } from "react";
 export type User = {
   id: number;
   name: string;
+  dateCreated: string;
+  dateUpdated: string;
+  wallet: string;
+  boughtPosts: number[];
 };
 
 export type Post = {
+  id: number;
+  dateCreated?: string;
+  dateUpdated?: string;
   subreddit: string;
   subreddit_name_prefixed: string;
   author: string;
@@ -27,6 +34,7 @@ export type Post = {
   likes?: boolean;
   saved?: boolean;
   token?: string;
+  price: number;
 };
 
 export type Props = {

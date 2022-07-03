@@ -1,32 +1,23 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { postsRepo } from "../../../helpers/posts-repo";
+import { Post } from "../../../interfaces";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const {
-    subreddit = "popular",
-    sort_type = "hot",
-    t = "day",
-    limit = 25,
-    after = "",
-    token = "",
-    home = false
+    after = ""
   } = JSON.parse(req.body);
-  const url =
-    token != ""
-      ? home
-        ? `https://oauth.reddit.com/${sort_type}?limit=${limit}&after=${after}&t=${t}`
-        : `https://oauth.reddit.com/r/${subreddit}/${sort_type}?limit=${limit}&after=${after}&t=${t}`
-      : `https://www.reddit.com/r/${subreddit}/${sort_type}.json?limit=${limit}&after=${after}&t=${t}`;
-  const headerOptions =
-    token != ""
-      ? {
-          headers: { Authorization: `Bearer ${token}` }
-        }
-      : {};
+  
+  let posts = postsRepo.getAll();
+  let idx = after == "" ? 0 : Number.parseInt(after);
+  const n_pos: Post[] = posts.slice(idx);
   try {
-    const resp = await (await fetch(url, headerOptions)).json();
+    let resp = {
+      posts: n_pos,
+      after: (idx + n_pos.length).toString()
+    };
     res.status(200).json(resp);
   } catch (error) {
     res.status(400).json(error);
