@@ -42,6 +42,7 @@ const ProfileOptions = ({ balance, handleDisconnect }: any) => {
         >
           <a
             className="my-1 px-5 p-2 cursor-pointer link-black-hover block"
+            href="/payment"
           >
             <b>{balance} TON</b>
           </a>
@@ -155,7 +156,7 @@ export const NavMenu = ({ token = "" }: any) => {
 
   const onConnectClicked = async () => {
     if (!isPluginSupported()) {
-      window.prompt("TON Wallet Plugin is not installed.")
+      window.alert("TON Wallet Plugin is not installed.")
       return;
     }
 

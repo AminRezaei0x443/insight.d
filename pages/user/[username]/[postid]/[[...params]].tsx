@@ -58,11 +58,13 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       H.track(
-        "Post", 
-        {subredditName: params.subreddit, nsfw: false.toString()}
+        "Post",
+        { subredditName: params.subreddit, nsfw: false.toString() }
       );
     }
   });
+
+  const [purchased, setPurchased] = useState(false);
   return (
     <PostLayout
       title={`${post.title}`}

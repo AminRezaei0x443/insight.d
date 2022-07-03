@@ -57,8 +57,12 @@ const PostContent = ({
     }
   };
 
-  const [purchased, setPurchased] = useState(true);
+  const [purchased, setPurchased] = useState(false);
 
+
+  const handlePurchase = () => {
+    setTimeout(() => setPurchased(true), 500)
+  }
 
 
   return (
@@ -67,9 +71,11 @@ const PostContent = ({
         {title}
       </h1>
       {!purchased ? <div className="my-12 flex flex-col items-center justify-center">
-        <h3>Purchase this article to access the content</h3>
-        <button className="my-4 py-4 px-8 cursor-pointer max-w-full btn-black text-white rounded outline-none">
-          UNLOCK (2 TON)
+        <h3>Purchase this article to unlock the content</h3>
+        <button
+          onClick={handlePurchase}
+          className="my-4 py-2 px-4 cursor-pointer max-w-full btn-black text-white rounded outline-none">
+          Unlock (1 TON)
         </button>
       </div> : <>
         <h3 className="sub-link-grey text-xl sm:text-lg sm:mt-2 sm:leading-5">
