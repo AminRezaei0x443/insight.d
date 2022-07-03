@@ -36,6 +36,13 @@ export const disconnectWallet = async (): Promise<boolean> => {
 
 export const isConnected = () => wallet !== undefined;
 
+export const getWalletAddress = async (): Promise<string | null> => {
+    const accounts = await ton?.provider.send('ton_requestAccounts', undefined);
+    if (!Array.isArray(accounts) || accounts.length === 0)
+        return null;
+    return accounts[0];
+}
+
 export const getBalance = async (): Promise<string> => {
     const balance = await ton?.provider.send('ton_getBalance', undefined);
     if (typeof balance === "string") {
