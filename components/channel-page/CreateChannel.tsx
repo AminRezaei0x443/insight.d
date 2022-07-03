@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 // import tonMnemonic from "tonweb-mnemonic";
 
 
-function CreateChannel({ address }: any) {
+function CreateChannel() {
     return (
         <div className="w-full">
             <ImportWallet />
@@ -10,7 +10,7 @@ function CreateChannel({ address }: any) {
     )
 }
 
-const ImportWallet = ({ onImportDone }: any) => {
+const ImportWallet = () => {
     const [step, setStep] = useState<"words" | "password">("words")
     const [wordsInput, setWordsInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");

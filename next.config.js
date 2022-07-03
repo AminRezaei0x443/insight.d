@@ -6,11 +6,12 @@ module.exports = {
 
         config.module.rules.push({
             test: /\.js$/,
+            use: [
+                defaultLoaders.babel
+            ],
             exclude: /node_modules\/(?!tonweb\/).*/,
-            loader: defaultLoaders.babel,
-        });
+        })
 
-        // Important: return the modified config
         return config;
     },
     typescript: {
