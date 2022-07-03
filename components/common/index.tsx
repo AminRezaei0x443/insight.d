@@ -137,7 +137,7 @@ export const NavMenu = ({ token = "" }: any) => {
   const newSearch = () => (window.location.href = `/search/?q=${searchTerm}`);
   return (
     <div className="items-center flex flex-row h-full justify-end">
-      <div className="flex flex-row items-center justify-end h-full">
+      {/* <div className="flex flex-row items-center justify-end h-full">
         <img
           className="cursor-pointer p-1 mr-2 ml-3 sub-opacity-68 link-black-hover"
           src="/search.svg"
@@ -152,7 +152,7 @@ export const NavMenu = ({ token = "" }: any) => {
             onKeyDown={(e) => e.key === "Enter" && newSearch()}
           />
         ) :null}
-      </div>
+      </div> */}
 
       {token != "" ? (
         <ProfileOptions />

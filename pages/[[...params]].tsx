@@ -83,7 +83,7 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
   };
 
   return (
-    <Layout title="Reddium – Medium-themed Reddit client" token={params.token}>
+    <Layout title="insight.d" token={params.token}>
       {/* <div className="lg:w-auto lg:mx-12 mx-auto w-full flex main-container max-width-main pb-10 sm:mx-6">
         <MidContainer>
           <LargeCard {...posts[0]} />
@@ -211,47 +211,34 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
               <img className="mr-3" src="bookmarks.svg" />
               <div>
                 <p className="heading-text text-sm leading-4 uppercase tracking-wide sm:text-xs">
-                  About Reddium
+                  About insight.d
                 </p>
               </div>
             </div>
             <div className="w-full pb-6">
               <p className="text-sm">
-                Ever wanted to browse Reddit while studying at Starbucks? Or
-                while sitting on the subway to work? Worried that people around
-                you would judge the subreddits you browse and the posts you
-                read?
+                Ever wanted to read and share posts and increase your insight,
+                But the subscriptions were pain in the ass?
                 <br />
                 <br />
-                Reddium is a Medium-themed Reddit client. The Reddium interface
-                converts Reddit posts, discussions, and memes into well-crafted
-                articles. Medium's layout feels a little more readable than
-                Reddit's, removing all distractions and clutter. It also
-                bypasses Reddit's frustrating mobile browser.
+                insight.d is a future blogging and learning platform that allows you
+                to pay just for the material you want, with no need of subscriptions
+                or deposits to our wallets.
+                We're powered by Payment Channels of The Open Network (TON),
+                All you need to do is to setup a TON wallet, buy some TONs, and
+                create a payment channel in insight.d with the balance you desire.
                 <br />
-                <br />I hope you enjoy this project! Feel free to suggest any
+                <br />We hope you enjoy this project! Feel free to suggest any
                 features or report bugs on GitHub.
               </p>
             </div>
-            <div className="w-full pb-6 hidden">
-              <img className="w-4/12 float-right" src="/signature.png" />
-            </div>
             <a
-              href="https://github.com/eightants/reddium/"
+              href="https://github.com/AminRezaei0x443/insight.d/"
               target="_blank"
               rel="noopener noreferrer"
             >
               <button className="mt-2 mx-1 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-black text-white rounded">
                 ✨ Star on GitHub
-              </button>
-            </a>
-            <a
-              href="https://ko-fi.com/eightants"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="mt-2 mx-1 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-outline-black text-white rounded">
-                ☕ Buy me a coffee
               </button>
             </a>
           </div>

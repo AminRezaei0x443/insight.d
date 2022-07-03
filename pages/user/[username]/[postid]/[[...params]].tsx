@@ -1,19 +1,19 @@
 import { GetServerSideProps } from "next";
 import React, { useEffect, useState } from "react";
-import PostLayout from "../../../../../components/PostLayout";
-import PostHeader from "../../../../../components/post-page/PostHeader";
-import PostContent from "../../../../../components/post-page/PostContent";
-import PostComments from "../../../../../components/post-page/PostComments";
-import { Dropdown } from "../../../../../components/common";
+import PostLayout from "../../../../components/PostLayout";
+import PostHeader from "../../../../components/post-page/PostHeader";
+import PostContent from "../../../../components/post-page/PostContent";
+import PostComments from "../../../../components/post-page/PostComments";
+import { Dropdown } from "../../../../components/common";
 import {
   COMMENT_PARAM_DEFAULT,
   COMMENT_PARAM_KEY,
   COMMENT_PARAM_VALUES,
   SORT_PARAM
-} from "../../../../../functions/constants";
+} from "../../../../functions/constants";
 import { zipObject } from "lodash";
 import Cookies from "cookies";
-import { getPostInfo } from "../../../../../functions/service";
+import { getPostInfo } from "../../../../functions/service";
 import { H } from "highlight.run";
 
 export const getServerSideProps: GetServerSideProps = async ({
@@ -59,13 +59,13 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
     if (typeof window !== 'undefined') {
       H.track(
         "Post", 
-        {subredditName: params.subreddit, nsfw: post.over_18.toString()}
+        {subredditName: params.subreddit, nsfw: false.toString()}
       );
     }
   });
   return (
     <PostLayout
-      title={`${post.title} | ${params.subreddit}`}
+      title={`${post.title}`}
       permalink={post.permalink}
       thumbnail={post.thumbnail}
       token={params.token}
@@ -75,7 +75,7 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
         <PostContent {...post} token={selectedParams.token} />
       </section>
       <section className="w-full mx-auto max-w-600 pb-10">
-        <div className="sub-bottom-border mb-4 pt-4"></div>
+        {/* <div className="sub-bottom-border mb-4 pt-4"></div>
         <div className="flex justify-start mb-8">
           <div className="max-width-filter flex w-full px-4">
             <Dropdown
@@ -93,7 +93,7 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
               Filter
             </button>
           </div>
-        </div>
+        </div> */}
         <PostComments
           comments={comments}
           backToPost={commentId == "" ? "" : returnToPost}

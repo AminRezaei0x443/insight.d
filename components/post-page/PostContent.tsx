@@ -57,7 +57,7 @@ const PostContent = ({
     }
   };
 
-  const [purchased, setPurchased] = useState(false);
+  const [purchased, setPurchased] = useState(true);
 
 
 

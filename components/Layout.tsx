@@ -10,12 +10,12 @@ const Layout = ({ children, title, token }: Props) => (
     <TitleHead title={title}>
       <meta
         name="description"
-        content="The Reddit client for Silicon Valley. "
+        content="Future's Insight Platform"
       />
       <meta property="og:url" content={DOMAIN} />
       <meta
         property="og:description"
-        content="The Reddit client for Silicon Valley. "
+        content="Future's Insight Platform"
       />
       <meta property="og:image" content={`${DOMAIN}/reddium-mockup.png`} />
     </TitleHead>
@@ -24,15 +24,15 @@ const Layout = ({ children, title, token }: Props) => (
         <div className="flex-grow flex items-center">
           <a href="/">
             <div className="pr-4 nav-img h-8 flex flex-row items-center cursor-pointer sm:border-0">
-              <img className="h-full sm:h-6" src="reddium_symbol.svg" />
+              <img className="h-full sm:h-6" src="insight-l.png" />
               <h1 className="ml-4 site-name text-3xl tracking-tighter sm:hidden text-black">
-                TON Medium
+                insight.d
               </h1>
             </div>
           </a>
           <div className="pl-4">
             <h1 className="font-bold text-lg leading-6 nav-greeting sm:hidden">
-              {getTimeOfDay()}
+              Read, Write, Enjoy
             </h1>
           </div>
         </div>

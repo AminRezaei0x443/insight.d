@@ -29,7 +29,10 @@ const PostLayout = ({ children, title, permalink, thumbnail, token }: Props) => 
         <div className="flex-grow flex items-center">
           <a href="/">
             <div className="pr-4 h-6 flex flex-row items-center cursor-pointer">
-              <img className="h-full sm:h-6" src="/reddium_symbol.svg" />
+              <img className="h-full sm:h-6" src="/insight-l.png" />
+              <h1 className="ml-4 site-name text-2xl tracking-tighter sm:hidden text-black">
+                insight.d
+              </h1>
             </div>
           </a>
         </div>
