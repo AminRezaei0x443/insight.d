@@ -3,7 +3,7 @@ module.exports = {
         domains: ["a.thumbs.redditmedia.com"]
     },
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-        
+
         config.module.rules.push({
             test: /\.js$/,
             exclude: /node_modules\/(?!tonweb\/).*/,
@@ -12,5 +12,8 @@ module.exports = {
 
         // Important: return the modified config
         return config;
+    },
+    typescript: {
+        ignoreBuildErrors: true,
     },
 }
