@@ -2,14 +2,14 @@ import { zipObject } from "lodash";
 import React, { useEffect, useRef, useState } from "react";
 import { getIntFromString, getTime, limitText } from "../../functions/common";
 import { CLIENT_ID, DESC_MAX, REDIRECT_URI } from "../../functions/constants";
+import { connectWallet, disconnectWallet, getBalance, isConnected, isPluginSupported } from "../../functions/wallet";
 import { DropdownProps, Props } from "../../interfaces";
 
 export const MidContainer = ({ children }: Props) => (
   <div className="mid-container px-4 sm:px-0">{children}</div>
 );
 
-const ProfileOptions = () => {
-  const [balance, setBalance] = useState(0);
+const ProfileOptions = ({ balance, handleDisconnect }: any) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdown = useRef<HTMLDivElement>(null);
 
@@ -43,10 +43,11 @@ const ProfileOptions = () => {
           <a
             className="my-1 px-5 p-2 cursor-pointer link-black-hover block"
           >
-            Balance: <b>{balance}TON</b>
+            <b>{balance} TON</b>
           </a>
           <a
             className="my-1 px-5 p-2 cursor-pointer link-black-hover block"
+            onClick={handleDisconnect}
           >
             Disconnect
           </a>
@@ -132,9 +133,42 @@ export const PostMetadata = ({
 );
 
 export const NavMenu = ({ token = "" }: any) => {
+  const [connected, setConnected] = useState(false);
+  const [balance, setBalance] = useState("");
+
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const newSearch = () => (window.location.href = `/search/?q=${searchTerm}`);
+
+  useEffect(() => {
+    const publicKey = window.localStorage.getItem("pk");
+    if (publicKey) {
+      connectWallet(publicKey).then(res => setConnected(res));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (connected) {
+      getBalance().then(b => setBalance(b));
+    }
+  }, [connected])
+
+  const onConnectClicked = async () => {
+    if (!isPluginSupported()) {
+      window.prompt("TON Wallet Plugin is not installed.")
+      return;
+    }
+
+    const connectionResult = await connectWallet(null);
+    setConnected(connectionResult);
+  }
+
+  const handleDisconnect = async () => {
+    await disconnectWallet();
+    setConnected(false);
+    setBalance("")
+  }
+
   return (
     <div className="items-center flex flex-row h-full justify-end">
       {/* <div className="flex flex-row items-center justify-end h-full">
@@ -154,10 +188,10 @@ export const NavMenu = ({ token = "" }: any) => {
         ) :null}
       </div> */}
 
-      {token != "" ? (
-        <ProfileOptions />
+      {connected ? (
+        <ProfileOptions balance={balance} handleDisconnect={handleDisconnect} />
       ) : (
-        <button className="my-4 ml-4 p-1 px-3 text-sm cursor-pointer max-w-full btn-black text-white outline-1px rounded">
+        <button onClick={onConnectClicked} className="my-4 ml-4 p-1 px-3 text-sm cursor-pointer max-w-full btn-black text-white outline-1px rounded">
           Connect
         </button>
       )}
@@ -176,9 +210,8 @@ export const SubredditCard = ({
       <div
         className="rounded"
         style={{
-          backgroundImage: `url(${
-            icon_img ? icon_img : "/placeholders/default.jpg"
-          })`,
+          backgroundImage: `url(${icon_img ? icon_img : "/placeholders/default.jpg"
+            })`,
           width: "60px",
           height: "60px",
           backgroundSize: "cover"
@@ -207,11 +240,10 @@ export const UserCard = ({ name, icon_img }: any) => (
       <div
         className="rounded-full"
         style={{
-          backgroundImage: `url(${
-            icon_img && !icon_img.includes("styles")
-              ? icon_img
-              : "/avatars/avatar_" + getIntFromString(name, 18) + ".jpg"
-          })`,
+          backgroundImage: `url(${icon_img && !icon_img.includes("styles")
+            ? icon_img
+            : "/avatars/avatar_" + getIntFromString(name, 18) + ".jpg"
+            })`,
           width: "60px",
           height: "60px",
           backgroundSize: "cover"
