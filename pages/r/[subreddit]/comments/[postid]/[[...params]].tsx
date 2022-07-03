@@ -45,8 +45,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 
 const PostPage = ({ post, comments, params, commentId }: any) => {
-  // const [moreIndex, setMoreIndex] = useState(0);
-  // const [commentList, setCommentList] = useState(comments);
   const [selectedParams, setSelectedParams] = useState({
     ...zipObject(COMMENT_PARAM_KEY, COMMENT_PARAM_DEFAULT),
     ...params
@@ -65,22 +63,6 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
       );
     }
   });
-  // const fetchMoreComments = async () => {
-  //   const moreObject = comments[comments.length - 1];
-  //   const moreComments = await getMoreCommentsClient({
-  //     link_id: moreObject.parent_id,
-  //     children: moreObject.children.slice(
-  //       moreIndex,
-  //       Math.min(moreIndex + 30, moreObject.children.length)
-  //     )
-  //   });
-  //   if (moreIndex + 30 >= moreObject.children.length) {
-  //     setMoreIndex(-1);
-  //   } else {
-  //     setMoreIndex(moreIndex + 30);
-  //   }
-  //   // setCommentList([...commentList, ...moreComments]);
-  // };
   return (
     <PostLayout
       title={`${post.title} | ${params.subreddit}`}

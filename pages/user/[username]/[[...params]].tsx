@@ -32,10 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
 const UserPage = ({ postData, userInfo, params }: any) => {
   const [{ posts, after }, setPostData] = useState(postData);
-  // const [selectedParams, setSelectedParams] = useState({
-  //   ...zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
-  //   ...params
-  // });
+  
   const fetchMorePosts = async () => {
     const next = await getUserPostsClient({
       ...params,
@@ -43,6 +40,7 @@ const UserPage = ({ postData, userInfo, params }: any) => {
     });
     setPostData({ posts: [...posts, ...next.posts], after: next.after });
   };
+  
   return (
     <div>
       <TitleHead title={`${userInfo.name} – Reddium`}>
