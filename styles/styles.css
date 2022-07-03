@@ -3,7 +3,7 @@
 @tailwind components;
 /* purgecss end ignore */
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap');
 @font-face {
   font-family: "Sohne";
   src: url("../public/Sohne-Kraftig.otf");
@@ -76,7 +76,7 @@ a.post-link-clear:hover {
 }
 
 .site-name {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Maven Pro, "Times New Roman", Times, serif;
 }
 
 .heading-font {

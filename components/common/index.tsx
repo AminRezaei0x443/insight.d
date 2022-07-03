@@ -171,7 +171,7 @@ export const NavMenu = ({ token = "" }: any) => {
 
   return (
     <div className="items-center flex flex-row h-full justify-end">
-      <div className="flex flex-row items-center justify-end h-full">
+      {/* <div className="flex flex-row items-center justify-end h-full">
         <img
           className="cursor-pointer p-1 mr-2 ml-3 sub-opacity-68 link-black-hover"
           src="/search.svg"
@@ -185,8 +185,8 @@ export const NavMenu = ({ token = "" }: any) => {
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && newSearch()}
           />
-        ) : null}
-      </div>
+        ) :null}
+      </div> */}
 
       {connected ? (
         <ProfileOptions balance={balance} handleDisconnect={handleDisconnect} />

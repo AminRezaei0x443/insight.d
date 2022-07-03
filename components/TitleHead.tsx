@@ -12,7 +12,14 @@ const TitleHead = ({ title, children }: Props) => {
       <meta property="og:type" content="website" />
       <meta name="twitter:site" content="@Reddium" />
       <meta name="twitter:card" content="summary_large_image" />
-      <link
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+      <link rel="manifest" href="/site.webmanifest"/>
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#00f08a"/>
+      <meta name="msapplication-TileColor" content="#05194a"/>
+      <meta name="theme-color" content="#ffffff"></meta>
+      {/* <link
         rel="apple-touch-icon"
         sizes="180x180"
         href="/apple-touch-icon.png"
@@ -28,7 +35,7 @@ const TitleHead = ({ title, children }: Props) => {
         type="image/png"
         sizes="16x16"
         href="/favicon-16x16.png"
-      />
+      /> */}
       {children}
     </Head>
   );
