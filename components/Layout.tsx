@@ -1,5 +1,4 @@
 import React from "react";
-import { getTimeOfDay } from "../functions/common";
 import { DOMAIN } from "../functions/constants";
 import { Props } from "../interfaces";
 import { NavMenu } from "./common";
