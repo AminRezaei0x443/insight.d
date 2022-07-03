@@ -13,7 +13,7 @@ import {
 } from "../../../../functions/constants";
 import { zipObject } from "lodash";
 import Cookies from "cookies";
-import { getPostInfo } from "../../../../functions/service";
+import { getPostInfo } from "../../../../functions/server_f";
 import { H } from "highlight.run";
 
 export const getServerSideProps: GetServerSideProps = async ({

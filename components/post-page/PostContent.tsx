@@ -118,7 +118,7 @@ const PostContent = ({
               </div>
             </div>
           </div>
-          <div className="items-center flex sub-opacity-54 sm:hidden">
+          {/* <div className="items-center flex sub-opacity-54 sm:hidden">
             <a
               className="w-48 truncate hover:underline font-semibold"
               href={url}
@@ -127,7 +127,7 @@ const PostContent = ({
             >
               {url}
             </a>
-          </div>
+          </div> */}
         </div>
         <figure className="mt-16">
           {url && isVideo(url) ? (

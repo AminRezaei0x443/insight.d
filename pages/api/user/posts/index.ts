@@ -1,27 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { postsRepo } from "../../../../helpers/posts-repo";
+import { Post } from "../../../../interfaces";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const {
-    username,
-    sort = "new",
-    category = "",
-    t = "day",
-    token = "",
     after = ""
   } = JSON.parse(req.body);
-  const url = `https://www.reddit.com/user/${username}/${category}.json?sort=${sort}&after=${after}&t=${t}`;
-  const headerOptions =
-    token != ""
-      ? {
-          headers: { Authorization: `Bearer ${token}` }
-        }
-      : {};
+  
+  let posts = postsRepo.getAll();
+  console.log(posts);
+  let idx = after == "" ? 0 : Number.parseInt(after);
+  const n_pos: Post[] = posts.slice(idx);
   try {
-    const resp = await (await fetch(url, headerOptions)).json();
-    console.log(resp);
+    let resp = {
+      posts: n_pos,
+      after: (idx + n_pos.length).toString()
+    };
     res.status(200).json(resp);
   } catch (error) {
     res.status(400).json(error);

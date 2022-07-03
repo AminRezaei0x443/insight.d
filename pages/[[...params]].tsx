@@ -6,7 +6,6 @@ import MidCard from "../components/home-page/MidCard";
 import { Dropdown, MidContainer } from "../components/common";
 import { GetServerSideProps } from "next";
 import {
-  getPopularPosts,
   getPopularPostsClient,
   getProfile
 } from "../functions/service";
@@ -30,17 +29,17 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   query
 }) => {
-  const trendingSubs = await getPopularPosts({
-    subreddit: "trendingsubreddits",
-    sort_type: "new",
-    limit: 1
-  });
+  // const trendingSubs = await getPopularPosts({
+  //   subreddit: "trendingsubreddits",
+  //   sort_type: "new",
+  //   limit: 1
+  // });
   const cookies = new Cookies(req, res);
   const token = cookies.get("token") || "";
   const profile = token === "" ? {} : await getProfile({ token });
   return {
     props: {
-      trendingSubs,
+      // trendingSubs,
       profile,
       params: {
         ...query,
@@ -75,7 +74,7 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
   };
 
   const fetchMorePosts = async () => {
-    const next = await getPopularPosts({
+    const next = await getPopularPostsClient({
       ...selectedParams,
       after: after
     });
@@ -218,7 +217,7 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
             <div className="w-full pb-6">
               <p className="text-sm">
                 Ever wanted to read and share posts and increase your insight,
-                But the subscriptions were pain in the ass?
+                But the subscriptions were pain in the neck?
                 <br />
                 <br />
                 insight.d is a future blogging and learning platform that allows you

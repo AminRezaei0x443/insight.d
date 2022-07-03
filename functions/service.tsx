@@ -1,79 +1,6 @@
 import { Post, QueryParams } from "../interfaces";
 import { SPECIAL_SUBREDDITS } from "./constants";
 
-let g_posts: Post[] = [
-  {
-    author: "Gianluca Busato",
-    created_utc: (new Date().getTime() / 1000) - (6 * 24 * 60 * 60),
-    name: "Hi",
-    num_comments: 0,
-    title: "What is a Decentralized Exchange (DEX)?",
-    permalink:"/user/busato/1",
-    thumbnail: "https://miro.medium.com/fit/c/140/140/1*XUG_YPhcUKFPw8cp7oLFiw.jpeg",
-    selftext: "DEX (Decentralized Exchange) is known for trying to offer alternatives to centralized exchanges by operating as a decentralized exchange.",
-    subreddit: "sr",
-    subreddit_name_prefixed:"Blockchain",
-    ups: 1,
-    url: "fdsf",
-  },
-  {
-    author: "Laszlo Fazekas",
-    created_utc: (new Date().getTime() / 1000) - (34 * 24 * 60 * 60),
-    name: "Hi",
-    num_comments: 0,
-    title: "Understanding Zero-Knowledge Proofs Through the Source Code of Tornado Cash",
-    permalink:"/user/fazekas/2",
-    thumbnail:"https://miro.medium.com/fit/c/140/140/0*uJmdJkcXqGykJWRm",
-    selftext: "Dive into the world of smart contracts with Zero-knowledge proof — Based on Wikipedia, the definition of the Zero Knowledge Proof (ZKP) is the",
-    subreddit: "sr",
-    subreddit_name_prefixed:"Cryptography",
-    ups: 14,
-    url: "fdsf",
-  },
-  {
-    author: "Jesus Solano",
-    created_utc: (new Date().getTime() / 1000) - (9 * 24 * 60 * 60),
-    name: "Hi",
-    num_comments: 0,
-    title: "Prompting: The new era of Natural Language Processing",
-    permalink:"/user/solano/3",
-    thumbnail:"https://miro.medium.com/fit/c/140/140/0*45HE5Oh7jfaLQj1z",
-    selftext: "Recent progress in Natural Language Processing (NLP) has shown promising results on automatic text generation.",
-    subreddit: "sr",
-    subreddit_name_prefixed:"NLP",
-    ups: 14,
-    url: "fdsf",
-  }
-]
-
-export async function getPopularPosts({
-  subreddit = "popular",
-  sort_type = "hot",
-  t = "day",
-  limit = 25,
-  after = "",
-  token = ""
-}: QueryParams) {
-  const url =
-    token != ""
-      ? `https://oauth.reddit.com/r/${subreddit}/${sort_type}?limit=${limit}&after=${after}&t=${t}`
-      : `https://www.reddit.com/r/${subreddit}/${sort_type}.json?limit=${limit}&after=${after}&t=${t}`;
-  const headerOptions =
-    token != ""
-      ? {
-          headers: { Authorization: `Bearer ${token}` }
-        }
-      : {};
-  const res = await (await fetch(url, headerOptions)).json();
-  const postList = await res.data.children;
-  const posts: Post[] = postList.map((post: any) => post.data);
-  let idx = after == "" ? 0 : Number.parseInt(after);
-  const n_pos: Post[] = g_posts.slice(idx);
-  return {
-    posts: n_pos,
-    after: (idx + n_pos.length).toString()
-  };
-}
 
 export async function getPopularPostsClient(params: QueryParams) {
   const headerOptions = {
@@ -81,14 +8,7 @@ export async function getPopularPostsClient(params: QueryParams) {
     body: JSON.stringify(params)
   };
   const res = await (await fetch("/api/posts", headerOptions)).json();
-  const postList = await res.data.children;
-  const posts: Post[] = postList.map((post: any) => post.data);
-  // let idx = after == "" ? 0 : Number.parseInt(after);
-  const n_pos: Post[] = g_posts.slice(0);
-  return {
-    posts: n_pos,
-    after:  n_pos.length
-  };
+  return res;
 }
 
 export async function getSubredditInfo({ subreddit, token = "" }: QueryParams) {
@@ -105,37 +25,6 @@ export async function getSubredditInfo({ subreddit, token = "" }: QueryParams) {
       : {};
   const res = await (await fetch(url, headerOptions)).json();
   return res.data;
-}
-
-export async function getPostInfo({
-  subreddit,
-  postid,
-  commentid,
-  sort = "confidence",
-  token = ""
-}: QueryParams) {
-  console.log(subreddit, postid, commentid);
-  
-  // const postReq = commentid == "" ? postid : `${postid}/eightants/${commentid}`;
-  // const url =
-  //   token != ""
-  //     ? `https://oauth.reddit.com/r/${subreddit}/comments/${postReq}?sort=${sort}`
-  //     : `https://www.reddit.com/r/${subreddit}/comments/${postReq}.json?sort=${sort}`;
-  // const headerOptions =
-  //   token != ""
-  //     ? {
-  //         headers: { Authorization: `Bearer ${token}` }
-  //       }
-  //     : {};
-  // const res = await (await fetch(url, headerOptions)).json();
-  // if (!res.hasOwnProperty("error")) {
-    // const comments: Post[] = res[1].data.children.map((post: any) => post.data);
-    return {
-      post: g_posts[Number.parseInt(postid ?? "1") - 1],
-      comments: []
-    };
-  // }
-  // return res;
 }
 
 export async function getUserPosts({
