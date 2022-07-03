@@ -1,6 +1,23 @@
 import { Post, QueryParams } from "../interfaces";
 import { SPECIAL_SUBREDDITS } from "./constants";
 
+let g_posts: Post[] = [
+  {
+    author: "Joe Mama",
+    created_utc: (new Date().getTime() / 1000) - (6 * 24 * 60 * 60),
+    name: "Hi",
+    num_comments: 0,
+    title: "Hosfds",
+    permalink:"wtf",
+    selftext: "fdsjfldsjfkl",
+    subreddit: "sr",
+    subreddit_name_prefixed:"r",
+    ups: 1,
+    url: "fdsf"
+
+  }
+]
+
 export async function getPopularPosts({
   subreddit = "popular",
   sort_type = "hot",
@@ -22,9 +39,11 @@ export async function getPopularPosts({
   const res = await (await fetch(url, headerOptions)).json();
   const postList = await res.data.children;
   const posts: Post[] = postList.map((post: any) => post.data);
+  let idx = after == "" ? 0 : Number.parseInt(after);
+  const n_pos: Post[] = g_posts.slice(idx);
   return {
-    posts: posts,
-    after: res.data.after
+    posts: n_pos,
+    after: (idx + n_pos.length).toString()
   };
 }
 
@@ -36,9 +55,11 @@ export async function getPopularPostsClient(params: QueryParams) {
   const res = await (await fetch("/api/posts", headerOptions)).json();
   const postList = await res.data.children;
   const posts: Post[] = postList.map((post: any) => post.data);
+  // let idx = after == "" ? 0 : Number.parseInt(after);
+  const n_pos: Post[] = g_posts.slice(0);
   return {
-    posts: posts,
-    after: res.data.after
+    posts: n_pos,
+    after:  n_pos.length
   };
 }
 
@@ -65,6 +86,7 @@ export async function getPostInfo({
   sort = "confidence",
   token = ""
 }: QueryParams) {
+  console.log(subreddit, postid, commentid);
   const postReq = commentid == "" ? postid : `${postid}/eightants/${commentid}`;
   const url =
     token != ""

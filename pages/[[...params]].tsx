@@ -84,7 +84,7 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
 
   return (
     <Layout title="Reddium – Medium-themed Reddit client" token={params.token}>
-      <div className="lg:w-auto lg:mx-12 mx-auto w-full flex main-container max-width-main pb-10 sm:mx-6">
+      {/* <div className="lg:w-auto lg:mx-12 mx-auto w-full flex main-container max-width-main pb-10 sm:mx-6">
         <MidContainer>
           <LargeCard {...posts[0]} />
         </MidContainer>
@@ -173,8 +173,8 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
             <TrendingSubs {...trendingSubs} />
           </div>
         </MidContainer>
-      </div>
-      <div className="w-full flex main-container max-width-main pb-4 pt-10 sub-top-border lg:w-auto lg:mx-12 sm:mx-6">
+      </div> */}
+      {/* <div className="w-full flex main-container max-width-main pb-4 pt-10 sub-top-border lg:w-auto lg:mx-12 sm:mx-6">
         <div className="w-full flex mb-4 flex-row items-center">
           <img className="mr-3" src="trending.svg" />
           <div>
@@ -188,10 +188,10 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
             <RankedCard key={ind} rank={ind + 6} {...p} />
           ))}
         </div>
-      </div>
+      </div> */}
       <div className="w-full flex main-container max-width-main pb-4 pt-10 sub-top-border posts-grid lg:w-auto lg:mx-12 md:block sm:mx-6">
         <div className="w-full mb-4 grid-left">
-          {posts.slice(11, posts.length).map((p: any, ind: number) => (
+          {posts.slice(0, posts.length).map((p: any, ind: number) => (
             <WideCard key={ind} {...p} />
           ))}
           <div className="w-full text-center" ref={loader}>
