@@ -217,7 +217,7 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
             <div className="w-full pb-6">
               <p className="text-sm">
                 Ever wanted to read and share posts and increase your insight,
-                But the subscriptions were pain in the ass?
+                But the subscriptions were pain in the neck?
                 <br />
                 <br />
                 insight.d is a future blogging and learning platform that allows you
