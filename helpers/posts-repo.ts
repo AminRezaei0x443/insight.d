@@ -1,5 +1,6 @@
 import fs from "fs";
 import {Post} from "../interfaces";
+import path from 'path';
 
 let posts = loadData();
 
@@ -46,10 +47,12 @@ function _delete(id: number) {
 // private helper functions
 
 function loadData(): Post[] {
-    let d = fs.readFileSync("data/posts.json");
+    let x = path.join(process.cwd(), 'data');
+    let d = fs.readFileSync(x + "/posts.json");
     return JSON.parse(d.toString());
 }
 
 function saveData() {
-    fs.writeFileSync('data/posts.json', JSON.stringify(posts, null, 4));
+    let x = path.join(process.cwd(), 'data');
+    fs.writeFileSync(x + '/posts.json', JSON.stringify(posts, null, 4));
 }
